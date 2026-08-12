@@ -1,100 +1,85 @@
-# Student Management System
+# 🎓 Student Management System
 
-A full-stack Student Management System built using **Java, Spring Boot, Spring Data JPA, MySQL, HTML, CSS, and JavaScript**.
-
-The application provides REST APIs to manage student records with CRUD operations, search, filtering, sorting, pagination, validation, exception handling, and Swagger API documentation.
-
----
+A full-stack Student Management System developed using Java, Spring Boot, MySQL, HTML, CSS and JavaScript.
 
 ## 🚀 Features
 
-- Add new students
-- View all students
-- View student by ID
-- Update student details
-- Delete students
-- Search students by name
-- Filter students by course
-- Advanced filtering
-- Pagination
-- Sorting
-- Input validation
-- Global exception handling
-- RESTful APIs
-- Swagger API documentation
-- Responsive web interface
-
----
+- 🔐 Admin Login
+- 📊 Dashboard
+- ➕ Add Student
+- 👨‍🎓 View Students
+- ✏️ Edit Student
+- 🗑️ Delete Student
+- 🔍 Search Students
+- 🎯 Filter Students
+- 📄 Pagination
+- ↕️ Sorting
+- 🔗 REST APIs
+- 📚 Swagger API Documentation
+- 📱 Responsive UI
+- 🔄 Dashboard Refresh
+- 🕒 Recent Students
+- 🔧 Git & GitHub Version Control
 
 ## 🛠️ Technologies Used
 
 ### Backend
-
-- Java 21
+- Java
 - Spring Boot
 - Spring Data JPA
 - REST API
 - Maven
 
 ### Database
-
 - MySQL
 
 ### Frontend
-
 - HTML5
 - CSS3
 - JavaScript
 
 ### API Documentation
-
 - Swagger / OpenAPI
 
-### Version Control
-
+### Tools
+- Eclipse
+- VS Code
 - Git
 - GitHub
-
----
 
 ## 📂 Project Structure
 
 ```text
 FirstSpringBootProject
 │
-├── .mvn
-│   └── wrapper
-│
 ├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── [Java Packages]
-│   │   │       ├── Student.java
-│   │   │       ├── StudentRepository.java
-│   │   │       ├── StudentJsonController.java
-│   │   │       └── ...
-│   │   │
-│   │   └── resources
-│   │       ├── static
-│   │       │   ├── index.html
-│   │       │   ├── students.html
-│   │       │   ├── add-student.html
-│   │       │   └── css
-│   │       │       └── style.css
-│   │       │
-│   │       └── application.properties
-│   │
-│   └── test
+│   └── main
+│       ├── java
+│       │   └── com
+│       │       └── ...
+│       │
+│       └── resources
+│           ├── static
+│           │   ├── css
+│           │   │   └── style.css
+│           │   ├── index.html
+│           │   ├── login.html
+│           │   ├── students.html
+│           │   ├── add-student.html
+│           │   └── ...
+│           │
+│           └── application.properties
 │
-├── .gitattributes
-├── .gitignore
+├── screenshots
+│   ├── login.png
+│   ├── dashboard.png
+│   ├── student.png
+│   ├── add-student.png
+│   └── swagger.png
+│
 ├── pom.xml
-├── mvnw
-├── mvnw.cmd
-└── README.md
-```
-
----
+├── README.md
+└── .gitignore
 
 ## 🔗 REST API Endpoints
 
@@ -102,158 +87,40 @@ FirstSpringBootProject
 |---|---|---|
 | GET | `/students` | Get all students |
 | GET | `/students/{id}` | Get student by ID |
-| POST | `/students` | Add a new student |
+| POST | `/students` | Add new student |
 | PUT | `/students/{id}` | Update student |
 | DELETE | `/students/{id}` | Delete student |
 | GET | `/students/search` | Search students |
-| GET | `/students/page` | Get paginated students |
+| GET | `/students/page` | Pagination |
 | GET | `/students/filter` | Filter students |
 | GET | `/students/filter-advanced` | Advanced filtering |
-| GET | `/students/course` | Get students by course |
+| GET | `/students/course` | Search students by course |
 
----
-
-## 🗄️ Database
-
-This project uses **MySQL** as the database.
-
-### Student Fields
-
-- Student ID
-- Student Name
-- Course
-
----
-
-## ⚙️ How to Run
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Babu123455536/FirstSpringBootProject.git
-```
-
-### 2. Open the Project
-
-Open the project using:
-
-- Eclipse
-- Spring Tool Suite
-- VS Code
-- IntelliJ IDEA
-
-### 3. Configure MySQL
-
-Update the database details in:
-
-```text
-application.properties
-```
-
-Example:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/studentdb
-spring.datasource.username=root
-spring.datasource.password=YOUR_PASSWORD
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
-Replace `YOUR_PASSWORD` with your own MySQL password.
-
-### 4. Run the Application
-
-Run the Spring Boot application from your IDE.
-
-Or use:
-
-```bash
-mvn spring-boot:run
-```
-
----
-
-## 🧪 API Testing
-
-The REST APIs can be tested using:
-
-- Swagger UI
-- Postman
-- Browser
-- curl
-
-### Example POST Request
-
-```json
-{
-  "name": "Ravi",
-  "course": "Java Full Stack"
-}
-```
-
----
-
-## 📖 Swagger API Documentation
-
-After starting the application, open:
-
-```text
-http://localhost:8080/swagger-ui/index.html
-```
-
-Swagger UI can be used to view and test the available REST APIs.
-
-> The port may be different if it is configured differently in `application.properties`.
-
----
-
-## 🎯 Learning Outcomes
-
-This project demonstrates practical knowledge of:
-
-- Java
-- Spring Boot
-- REST API development
-- Spring Data JPA
-- MySQL database integration
-- CRUD operations
-- DTOs
-- Validation
-- Exception handling
-- Pagination
-- Sorting
-- Filtering
-- Git and GitHub
-
----
-
-## 👨‍💻 Author
-
-**B. Baburao**
-
-GitHub: https://github.com/Babu123455536
-
----
-
-## 📄 License
-
-This project is created for learning and portfolio purposes.
-
-## 📸 Application Screenshots
+## 📸 Screenshots
 
 ### 🔐 Login Page
+
 ![Login Page](screenshots/login.png)
 
-### 🏠 Dashboard
+### 📊 Dashboard
+
 ![Dashboard](screenshots/dashboard.png)
 
 ### 👨‍🎓 Student List
+
 ![Student List](screenshots/student.png)
 
 ### ➕ Add Student
+
 ![Add Student](screenshots/add-student.png)
 
-### 📖 Swagger API
+### 📚 Swagger API
+
 ![Swagger API](screenshots/swagger.png)
+
+## ▶️ How to Run
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/Babu123455536/FirstSpringBootProject.git
