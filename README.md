@@ -100,23 +100,23 @@ FirstSpringBootProject
 
 ### 🔐 Login Page
 
-![Login Page](screenshots/login.png)
+<img src="screenshots/login.png" alt="Login Page" width="800"/>
 
 ### 📊 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+<img src="screenshots/dashboard.png" alt="Dashboard" width="800"/>
 
 ### 👨‍🎓 Student List
 
-![Student List](screenshots/student.png)
+<img src="screenshots/student.png" alt="Student List" width="800"/>
 
 ### ➕ Add Student
 
-![Add Student](screenshots/add-student.png)
+<img src="screenshots/add-student.png" alt="Add Student" width="800"/>
 
 ### 📚 Swagger API
 
-![Swagger API](screenshots/swagger.png)
+<img src="screenshots/swagger.png" alt="Swagger API" width="800"/>
 
 ## ▶️ How to Run
 
