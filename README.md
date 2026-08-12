@@ -72,3 +72,40 @@ FirstSpringBootProject
 ├── mvnw
 ├── mvnw.cmd
 └── README.md
+---
+
+## 🔗 REST API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/students` | Get all students |
+| GET | `/students/{id}` | Get student by ID |
+| POST | `/students` | Add a new student |
+| PUT | `/students/{id}` | Update student |
+| DELETE | `/students/{id}` | Delete student |
+| GET | `/students/search` | Search students |
+| GET | `/students/page` | Get paginated students |
+| GET | `/students/filter` | Filter students |
+| GET | `/students/filter-advanced` | Advanced filtering |
+| GET | `/students/course` | Get students by course |
+
+---
+
+## 🗄️ Database
+
+This project uses **MySQL** as the database.
+
+The student records contain:
+
+- Student ID
+- Student Name
+- Course
+
+---
+
+## ⚙️ How to Run
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Babu123455536/FirstSpringBootProject.git
