@@ -95,7 +95,7 @@ FirstSpringBootProject
 | GET | `/students/filter` | Filter students |
 | GET | `/students/filter-advanced` | Advanced filtering |
 | GET | `/students/course` | Search students by course |
-
+```
 ## 📸 Screenshots
 
 ### Login Page
