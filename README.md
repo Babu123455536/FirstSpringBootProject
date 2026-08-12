@@ -244,21 +244,16 @@ This project is created for learning and portfolio purposes.
 ## 📸 Application Screenshots
 
 ### 🔐 Login Page
-
 ![Login Page](screenshots/login.png)
 
 ### 🏠 Dashboard
-
-![Dashboard](screenshots/Dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ### 👨‍🎓 Student List
-
-![Student List](screenshots/Student%20list.png)
+![Student List](screenshots/student.png)
 
 ### ➕ Add Student
-
-![Add Student](screenshots/Add%20Student.png)
+![Add Student](screenshots/add-student.png)
 
 ### 📖 Swagger API
-
-![Swagger API](screenshots/Swagger.png)
+![Swagger API](screenshots/swagger.png)
