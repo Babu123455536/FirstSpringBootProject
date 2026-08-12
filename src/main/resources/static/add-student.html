@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Student - Student Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <h2>Student Management System</h2>
+
+        <nav>
+
+            <a href="index.html">Dashboard</a>
+
+            <a href="students.html">Students</a>
+
+            <a href="add-student.html">Add Student</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="dashboard-container">
+
+    <h1>Add Student</h1>
+
+    <p class="welcome">
+        Add a new student to the system
+    </p>
+
+
+    <div class="recent-students">
+
+
+        <form id="addStudentForm">
+
+
+            <!-- NAME -->
+
+            <label for="name">
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter student name"
+                required
+            >
+
+
+            <small id="nameError"></small>
+
+
+            <br><br>
+
+
+            <!-- COURSE -->
+
+            <label for="course">
+                Course
+            </label>
+
+            <input
+                type="text"
+                id="course"
+                name="course"
+                placeholder="Enter course name"
+                required
+            >
+
+
+            <small id="courseError"></small>
+
+
+            <br><br>
+
+
+            <!-- BUTTONS -->
+
+            <button
+                type="submit"
+                class="edit-btn">
+
+                Add Student
+
+            </button>
+
+
+            <a
+                href="students.html"
+                class="view-all">
+
+                Cancel
+
+            </a>
+
+
+        </form>
+
+
+        <!-- MESSAGE -->
+
+        <p id="message"></p>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 Student Management System |
+        All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+const loggedIn = sessionStorage.getItem("loggedIn");
+
+if (sessionStorage.getItem("loggedIn") !== "true") {
+
+    window.location.href = "login.html";
+
+}
+
+document.getElementById(
+    'addStudentForm'
+).addEventListener(
+    'submit',
+    function(event) {
+
+        event.preventDefault();
+
+
+        /* ============================= */
+        /* GET VALUES */
+        /* ============================= */
+
+        const name =
+            document.getElementById(
+                'name'
+            ).value.trim();
+
+
+        const course =
+            document.getElementById(
+                'course'
+            ).value.trim();
+
+
+        const nameError =
+            document.getElementById(
+                'nameError'
+            );
+
+
+        const courseError =
+            document.getElementById(
+                'courseError'
+            );
+
+
+        const message =
+            document.getElementById(
+                'message'
+            );
+
+
+        /* CLEAR */
+
+        nameError.textContent = '';
+
+        courseError.textContent = '';
+
+        message.textContent = '';
+
+
+
+        /* ============================= */
+        /* VALIDATION */
+        /* ============================= */
+
+        if (name.length < 3) {
+
+            nameError.textContent =
+                'Name must be at least 3 characters.';
+
+            return;
+
+        }
+
+
+        if (course.length < 2) {
+
+            courseError.textContent =
+                'Please enter a valid course.';
+
+            return;
+
+        }
+
+
+
+        /* ============================= */
+        /* POST REQUEST */
+        /* ============================= */
+
+        fetch('/students', {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type':
+                    'application/json'
+
+            },
+
+            body: JSON.stringify({
+
+                name: name,
+
+                course: course
+
+            })
+
+        })
+
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    'Failed to add student'
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+
+        .then(data => {
+
+            alert(
+                'Student added successfully!'
+            );
+
+
+            /* Clear form */
+
+            document.getElementById(
+                'addStudentForm'
+            ).reset();
+
+
+            /* Go to Students page */
+
+            window.location.href =
+                'students.html';
+
+        })
+
+
+        .catch(error => {
+
+            console.error(
+                'Add Student Error:',
+                error
+            );
+
+
+            message.textContent =
+                'Unable to add student.';
+
+        });
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

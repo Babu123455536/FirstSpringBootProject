@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Student Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <h2>Student Management System</h2>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="dashboard-container">
+
+    <div class="recent-students login-box">
+
+        <h1>Admin Login</h1>
+
+        <p class="welcome">
+            Login to access the Student Management System
+        </p>
+
+
+        <form id="loginForm">
+
+
+            <!-- USERNAME -->
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                Login
+
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <p id="loginMessage"></p>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 Student Management System |
+        All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+document.getElementById("loginForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const username =
+        document.getElementById("username")
+        .value
+        .trim();
+
+
+    const password =
+        document.getElementById("password")
+        .value
+        .trim();
+
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    message.textContent = "Logging in...";
+
+
+    fetch("/login", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            username: username,
+
+            password: password
+
+        })
+
+    })
+
+
+    .then(function(response) {
+
+        return response.text();
+
+    })
+
+
+    .then(function(result) {
+
+        if (result === "Login Successful") {
+
+            sessionStorage.setItem(
+                "loggedIn",
+                "true"
+            );
+
+
+            sessionStorage.setItem(
+                "username",
+                username
+            );
+
+
+            window.location.href =
+                "index.html";
+
+        }
+
+        else {
+
+            message.textContent =
+                "Invalid username or password.";
+
+        }
+
+    })
+
+
+    .catch(function(error) {
+
+        console.error(
+            "Login Error:",
+            error
+        );
+
+
+        message.textContent =
+            "Unable to connect to server.";
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

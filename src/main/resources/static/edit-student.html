@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Student - Student Management System</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <h2>Student Management System</h2>
+
+        <nav>
+
+            <a href="index.html">
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                Students
+            </a>
+
+            <a href="add-student.html">
+                Add Student
+            </a>
+
+            <button
+                type="button"
+                class="logout-btn"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="dashboard-container">
+
+
+    <div class="recent-students login-box">
+
+        <h1>Edit Student</h1>
+
+        <p class="welcome">
+            Update student information
+        </p>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form id="editStudentForm">
+
+
+            <label for="name">
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter student name"
+                required
+            >
+
+
+            <label for="course">
+                Course
+            </label>
+
+            <input
+                type="text"
+                id="course"
+                placeholder="Enter course"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                Update Student
+
+            </button>
+
+
+            <p id="message"></p>
+
+
+        </form>
+
+    </div>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 Student Management System |
+        All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+// =====================================
+// LOGIN PROTECTION
+// =====================================
+
+if (sessionStorage.getItem("loggedIn") !== "true") {
+
+    window.location.href = "login.html";
+
+}
+
+
+// =====================================
+// GET STUDENT ID FROM URL
+// =====================================
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const studentId =
+    urlParams.get("id");
+
+
+// =====================================
+// CHECK ID
+// =====================================
+
+if (!studentId) {
+
+    alert("Student ID not found.");
+
+    window.location.href =
+        "students.html";
+
+}
+
+
+// =====================================
+// LOAD STUDENT DETAILS
+// =====================================
+
+function loadStudent() {
+
+    fetch("/students/" + studentId)
+
+        .then(function(response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Student not found"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function(student) {
+
+            document.getElementById("name")
+                .value = student.name;
+
+            document.getElementById("course")
+                .value = student.course;
+
+        })
+
+        .catch(function(error) {
+
+            console.error(
+                "Load Student Error:",
+                error
+            );
+
+            document.getElementById("message")
+                .textContent =
+                "Unable to load student.";
+
+        });
+
+}
+
+
+// =====================================
+// UPDATE STUDENT
+// =====================================
+
+document.getElementById(
+    "editStudentForm"
+)
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById(
+                "name"
+            ).value.trim();
+
+
+        const course =
+            document.getElementById(
+                "course"
+            ).value.trim();
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.textContent =
+            "Updating...";
+
+
+        fetch(
+            "/students/" + studentId,
+            {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    name: name,
+
+                    course: course
+
+                })
+
+            }
+        )
+
+        .then(function(response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Update failed"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function(data) {
+
+            alert(
+                "Student updated successfully!"
+            );
+
+            window.location.href =
+                "students.html";
+
+        })
+
+        .catch(function(error) {
+
+            console.error(
+                "Update Error:",
+                error
+            );
+
+            message.textContent =
+                "Unable to update student.";
+
+        });
+
+    }
+);
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "loggedIn"
+    );
+
+    sessionStorage.removeItem(
+        "username"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// =====================================
+// INITIAL LOAD
+// =====================================
+
+loadStudent();
+
+
+</script>
+
+
+</body>
+
+</html>

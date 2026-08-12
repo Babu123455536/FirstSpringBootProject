@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Students - Student Management System</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <h2>Student Management System</h2>
+
+        <nav>
+
+            <a href="index.html">
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                Students
+            </a>
+
+            <a href="add-student.html">
+                Add Student
+            </a>
+
+            <button
+                type="button"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="dashboard-container">
+
+    <h1>Student List</h1>
+
+    <p class="welcome">
+        Manage all students
+    </p>
+
+
+    <!-- ================= SEARCH ================= -->
+<div style="
+    display:flex;
+    gap:10px;
+    margin:25px 0;
+    flex-wrap:wrap;
+">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search student by name..."
+        style="
+            padding:12px;
+            width:300px;
+            border:1px solid #999;
+            border-radius:6px;
+            font-size:16px;
+        "
+    >
+
+    <button
+        type="button"
+        id="searchBtn"
+        style="
+            padding:12px 20px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        ">
+        Search
+    </button>
+
+    <button
+        type="button"
+        id="refreshBtn"
+        style="
+            padding:12px 20px;
+            background:#16a34a;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        ">
+        ↻ Refresh
+    </button>
+
+</div>
+
+    <!-- ================= STUDENT TABLE ================= -->
+
+    <div class="recent-students">
+
+        <div class="table-container">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Course</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="studentTableBody">
+
+                    <tr>
+
+                        <td colspan="4">
+                            Loading...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 Student Management System |
+        All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchBtn =
+        document.getElementById("searchBtn");
+
+    const refreshBtn =
+        document.getElementById("refreshBtn");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    /* ========================= */
+    /* REFRESH */
+    /* ========================= */
+
+    refreshBtn.addEventListener(
+        "click",
+        function () {
+
+            console.log("Refresh clicked");
+
+            loadStudents();
+
+        }
+    );
+
+
+    /* ========================= */
+    /* SEARCH */
+    /* ========================= */
+
+    searchBtn.addEventListener(
+        "click",
+        function () {
+
+            console.log("Search clicked");
+
+            searchStudents();
+
+        }
+    );
+
+
+    /* ========================= */
+    /* ENTER KEY SEARCH */
+    /* ========================= */
+
+    searchInput.addEventListener(
+        "keypress",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                searchStudents();
+
+            }
+
+        }
+    );
+
+
+    /* ========================= */
+    /* INITIAL LOAD */
+    /* ========================= */
+
+    loadStudents();
+
+});
+
+
+/* ========================= */
+/* LOAD STUDENTS */
+/* ========================= */
+
+function loadStudents() {
+
+    fetch("/students")
+
+        .then(function (response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "GET /students failed: "
+                    + response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (data) {
+
+            console.log(
+                "Students loaded:",
+                data
+            );
+
+            displayStudents(data);
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "Load Error:",
+                error
+            );
+
+            alert(
+                "Students load failed"
+            );
+
+        });
+
+}
+
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+function searchStudents() {
+
+    const keyword =
+        document.getElementById(
+            "searchInput"
+        ).value.trim();
+
+
+    if (keyword === "") {
+
+        loadStudents();
+
+        return;
+
+    }
+
+
+    fetch(
+        "/students/search?name="
+        + encodeURIComponent(keyword)
+    )
+
+        .then(function (response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Search failed: "
+                    + response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(function (data) {
+
+            console.log(
+                "Search result:",
+                data
+            );
+
+            displayStudents(data);
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "Search Error:",
+                error
+            );
+
+            alert(
+                "Search failed"
+            );
+
+        });
+
+}
+
+
+/* ========================= */
+/* DISPLAY */
+/* ========================= */
+
+function displayStudents(students) {
+
+    const tableBody =
+        document.getElementById(
+            "studentTableBody"
+        );
+
+
+    tableBody.innerHTML = "";
+
+
+    if (!students ||
+        students.length === 0) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    No students found
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    students.forEach(function (student) {
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${student.id}
+            </td>
+
+            <td>
+                ${student.name}
+            </td>
+
+            <td>
+                ${student.course}
+            </td>
+
+            <td>
+
+                <a
+                    href="edit-student.html?id=${student.id}"
+                    class="edit-btn">
+
+                    Edit
+
+                </a>
+
+                <button
+                    type="button"
+                    class="delete-btn"
+                    onclick="deleteStudent(${student.id})">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        tableBody.appendChild(row);
+
+    });
+
+}
+
+
+/* ========================= */
+/* DELETE */
+/* ========================= */
+
+function deleteStudent(id) {
+
+    if (!confirm(
+        "Are you sure you want to delete this student?"
+    )) {
+
+        return;
+
+    }
+
+
+    fetch(
+        "/students/" + id,
+        {
+            method: "DELETE"
+        }
+    )
+
+        .then(function (response) {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Delete failed"
+                );
+
+            }
+
+            return response.text();
+
+        })
+
+        .then(function () {
+
+            alert(
+                "Student deleted successfully!"
+            );
+
+            loadStudents();
+
+        })
+
+        .catch(function (error) {
+
+            console.error(
+                "Delete Error:",
+                error
+            );
+
+            alert(
+                "Delete failed"
+            );
+
+        });
+
+}
+
+
+/* ========================= */
+/* LOGOUT */
+/* ========================= */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "loggedIn"
+    );
+
+    sessionStorage.removeItem(
+        "username"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
