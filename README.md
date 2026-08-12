@@ -2,7 +2,7 @@
 
 A full-stack Student Management System built using **Java, Spring Boot, Spring Data JPA, MySQL, HTML, CSS, and JavaScript**.
 
-The application provides REST APIs to manage student records with features such as CRUD operations, search, filtering, sorting, pagination, validation, exception handling, and Swagger API documentation.
+The application provides REST APIs to manage student records with CRUD operations, search, filtering, sorting, pagination, validation, exception handling, and Swagger API documentation.
 
 ---
 
@@ -93,110 +93,150 @@ FirstSpringBootProject
 ├── mvnw.cmd
 └── README.md
 ```
-🔗 REST API Endpoints
-Method	Endpoint	Description
-GET	/students	Get all students
-GET	/students/{id}	Get student by ID
-POST	/students	Add a new student
-PUT	/students/{id}	Update student
-DELETE	/students/{id}	Delete student
-GET	/students/search	Search students
-GET	/students/page	Get paginated students
-GET	/students/filter	Filter students
-GET	/students/filter-advanced	Advanced filtering
-GET	/students/course	Get students by course
-🗄️ Database
 
-This project uses MySQL as the database.
+---
 
-Student records contain:
+## 🔗 REST API Endpoints
 
-Student ID
-Student Name
-Course
-⚙️ How to Run
-1. Clone the Repository
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/students` | Get all students |
+| GET | `/students/{id}` | Get student by ID |
+| POST | `/students` | Add a new student |
+| PUT | `/students/{id}` | Update student |
+| DELETE | `/students/{id}` | Delete student |
+| GET | `/students/search` | Search students |
+| GET | `/students/page` | Get paginated students |
+| GET | `/students/filter` | Filter students |
+| GET | `/students/filter-advanced` | Advanced filtering |
+| GET | `/students/course` | Get students by course |
+
+---
+
+## 🗄️ Database
+
+This project uses **MySQL** as the database.
+
+### Student Fields
+
+- Student ID
+- Student Name
+- Course
+
+---
+
+## ⚙️ How to Run
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/Babu123455536/FirstSpringBootProject.git
-2. Open the Project
+```
+
+### 2. Open the Project
 
 Open the project using:
 
-Eclipse
-Spring Tool Suite
-VS Code
-IntelliJ IDEA
-3. Configure MySQL
+- Eclipse
+- Spring Tool Suite
+- VS Code
+- IntelliJ IDEA
+
+### 3. Configure MySQL
 
 Update the database details in:
 
+```text
 application.properties
+```
 
 Example:
 
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/studentdb
 spring.datasource.username=root
 spring.datasource.password=YOUR_PASSWORD
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
 
-Replace YOUR_PASSWORD with your own MySQL password.
+Replace `YOUR_PASSWORD` with your own MySQL password.
 
-4. Run the Application
+### 4. Run the Application
 
 Run the Spring Boot application from your IDE.
 
 Or use:
 
+```bash
 mvn spring-boot:run
-🧪 API Testing
+```
+
+---
+
+## 🧪 API Testing
 
 The REST APIs can be tested using:
 
-Swagger UI
-Postman
-Browser
-curl
+- Swagger UI
+- Postman
+- Browser
+- curl
 
-Example POST request:
+### Example POST Request
 
+```json
 {
   "name": "Ravi",
   "course": "Java Full Stack"
 }
-📖 Swagger API Documentation
+```
+
+---
+
+## 📖 Swagger API Documentation
 
 After starting the application, open:
 
+```text
 http://localhost:8080/swagger-ui/index.html
+```
 
 Swagger UI can be used to view and test the available REST APIs.
 
-The port may be different if it is configured differently in application.properties.
+> The port may be different if it is configured differently in `application.properties`.
 
-🎯 Learning Outcomes
+---
+
+## 🎯 Learning Outcomes
 
 This project demonstrates practical knowledge of:
 
-Java
-Spring Boot
-REST API development
-Spring Data JPA
-MySQL database integration
-CRUD operations
-DTOs
-Validation
-Exception handling
-Pagination
-Sorting
-Filtering
-Git and GitHub
-👨‍💻 Author
+- Java
+- Spring Boot
+- REST API development
+- Spring Data JPA
+- MySQL database integration
+- CRUD operations
+- DTOs
+- Validation
+- Exception handling
+- Pagination
+- Sorting
+- Filtering
+- Git and GitHub
 
-B. Baburao
+---
+
+## 👨‍💻 Author
+
+**B. Baburao**
 
 GitHub: https://github.com/Babu123455536
 
-📄 License
+---
+
+## 📄 License
 
 This project is created for learning and portfolio purposes.
